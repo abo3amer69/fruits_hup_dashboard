@@ -1,5 +1,5 @@
 import 'dart:io';
 
 abstract class StorageServices {
-  Future<String> uploadFile(String file);
+  Future<String> uploadFile(File file, String path);
 }
