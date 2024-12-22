@@ -1,9 +1,12 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruits_hup_dashboard/core/custom_text_form_field.dart';
 import 'package:fruits_hup_dashboard/core/widget/custom_buttom.dart';
 import 'package:fruits_hup_dashboard/features/add_product/domain/entities/add_product_input_entity.dart';
+import 'package:fruits_hup_dashboard/features/add_product/presentation/manager/cubit/add_product_cubit.dart';
+import 'package:fruits_hup_dashboard/features/add_product/presentation/views/add_product_view.dart';
 import 'package:fruits_hup_dashboard/features/add_product/presentation/views/widget/custom_check_box.dart';
 import 'package:fruits_hup_dashboard/features/add_product/presentation/views/widget/image_field.dart';
 import 'package:fruits_hup_dashboard/features/add_product/presentation/views/widget/is_featured_check_box.dart';
@@ -106,6 +109,16 @@ class _AddProuductViewBodyState extends State<AddProuductViewBody> {
                         image: image!,
                         isFeatured: isFeatured,
                       );
+                      context.read<AddProductCubit>().addProduct(
+                            AddProductInputEntity(
+                              name: name,
+                              code: code,
+                              description: description,
+                              price: price,
+                              image: image!,
+                              isFeatured: isFeatured,
+                            ),
+                          );
                     } else {
                       autoValidateMode = AutovalidateMode.always;
                       setState(() {});
