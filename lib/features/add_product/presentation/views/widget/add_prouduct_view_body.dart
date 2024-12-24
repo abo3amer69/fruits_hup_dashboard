@@ -10,6 +10,7 @@ import 'package:fruits_hup_dashboard/features/add_product/presentation/views/add
 import 'package:fruits_hup_dashboard/features/add_product/presentation/views/widget/custom_check_box.dart';
 import 'package:fruits_hup_dashboard/features/add_product/presentation/views/widget/image_field.dart';
 import 'package:fruits_hup_dashboard/features/add_product/presentation/views/widget/is_featured_check_box.dart';
+import 'package:fruits_hup_dashboard/features/add_product/presentation/views/widget/is_organic_check_box.dart';
 
 class AddProuductViewBody extends StatefulWidget {
   const AddProuductViewBody({super.key});
@@ -23,9 +24,10 @@ class _AddProuductViewBodyState extends State<AddProuductViewBody> {
   AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
 
   late String name, code, description;
-  late num price;
+  late num price, expirationMonths, numberOfColories, unitAmount;
   File? image;
   bool isFeatured = false;
+  bool isOrganic = false;
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +63,36 @@ class _AddProuductViewBodyState extends State<AddProuductViewBody> {
               ),
               CustomTextFormField(
                 onSaved: (value) {
+                  expirationMonths = num.parse(value!);
+                },
+                hintText: 'Expiration Months',
+                textInputType: TextInputType.number,
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              CustomTextFormField(
+                onSaved: (value) {
+                  numberOfColories = num.parse(value!);
+                },
+                hintText: 'Number Of Colories',
+                textInputType: TextInputType.number,
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              CustomTextFormField(
+                onSaved: (value) {
+                  unitAmount = num.parse(value!);
+                },
+                hintText: 'Unit Amount',
+                textInputType: TextInputType.number,
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              CustomTextFormField(
+                onSaved: (value) {
                   code = value!.toLowerCase();
                 },
                 hintText: 'Product Code',
@@ -76,6 +108,14 @@ class _AddProuductViewBodyState extends State<AddProuductViewBody> {
                 hintText: 'Product Description',
                 textInputType: TextInputType.text,
                 maxLines: 5,
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              IsOranicCheckBox(
+                onChanged: (value) {
+                  isOrganic = value;
+                },
               ),
               const SizedBox(
                 height: 16,
@@ -102,6 +142,10 @@ class _AddProuductViewBodyState extends State<AddProuductViewBody> {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
                       AddProductInputEntity(
+                        isOrganic: isOrganic,
+                        expirationMonths: expirationMonths.toInt(),
+                        numOfCalories: numberOfColories.toInt(),
+                        unitAmount: unitAmount.toInt(),
                         name: name,
                         code: code,
                         description: description,
@@ -111,6 +155,10 @@ class _AddProuductViewBodyState extends State<AddProuductViewBody> {
                       );
                       context.read<AddProductCubit>().addProduct(
                             AddProductInputEntity(
+                              isOrganic: isOrganic,
+                              expirationMonths: expirationMonths.toInt(),
+                              numOfCalories: numberOfColories.toInt(),
+                              unitAmount: unitAmount.toInt(),
                               name: name,
                               code: code,
                               description: description,

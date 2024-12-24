@@ -11,7 +11,7 @@ class AddProductInputModel {
   final bool isFeatured;
   String? imageUrl;
   final int expirationMonths;
-  final bool isOrganic = false;
+  final bool isOrganic;
   final int numOfCalories;
   final num avgRating = 0;
   final num ratingCount = 0;
@@ -21,6 +21,7 @@ class AddProductInputModel {
       {required this.expirationMonths,
       required this.numOfCalories,
       required this.unitAmount,
+      required this.isOrganic,
       required this.name,
       required this.code,
       required this.description,
@@ -32,6 +33,7 @@ class AddProductInputModel {
   factory AddProductInputModel.fromEntity(
       AddProductInputEntity addProductInputEntity) {
     return AddProductInputModel(
+      isOrganic: addProductInputEntity.isOrganic,
       expirationMonths: addProductInputEntity.expirationMonths,
       numOfCalories: addProductInputEntity.numOfCalories,
       unitAmount: addProductInputEntity.unitAmount,
