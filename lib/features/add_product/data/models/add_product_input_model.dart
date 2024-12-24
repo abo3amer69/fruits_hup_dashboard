@@ -10,9 +10,18 @@ class AddProductInputModel {
   final File image;
   final bool isFeatured;
   String? imageUrl;
+  final int expirationMonths;
+  final bool isOrganic = false;
+  final int numOfCalories;
+  final num avgRating = 0;
+  final num ratingCount = 0;
+  final int unitAmount;
 
   AddProductInputModel(
-      {required this.name,
+      {required this.expirationMonths,
+      required this.numOfCalories,
+      required this.unitAmount,
+      required this.name,
       required this.code,
       required this.description,
       required this.price,
@@ -23,6 +32,9 @@ class AddProductInputModel {
   factory AddProductInputModel.fromEntity(
       AddProductInputEntity addProductInputEntity) {
     return AddProductInputModel(
+      expirationMonths: addProductInputEntity.expirationMonths,
+      numOfCalories: addProductInputEntity.numOfCalories,
+      unitAmount: addProductInputEntity.unitAmount,
       name: addProductInputEntity.name,
       code: addProductInputEntity.code,
       description: addProductInputEntity.description,
@@ -34,12 +46,16 @@ class AddProductInputModel {
   }
   toJson() {
     return {
-      name: name,
-      code: code,
-      description: description,
-      price: price,
-      isFeatured: isFeatured,
-      imageUrl: imageUrl,
+      'name': name,
+      'code': code,
+      'description': description,
+      'price': price,
+      'isFeatured': isFeatured,
+      'imageUrl': imageUrl,
+      'expirationMonths': expirationMonths,
+      'numOfCalories': numOfCalories,
+      'unitAmount': unitAmount,
+      'isOrganic': isOrganic,
     };
   }
 }
