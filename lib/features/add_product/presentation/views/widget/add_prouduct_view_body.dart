@@ -142,6 +142,7 @@ class _AddProuductViewBodyState extends State<AddProuductViewBody> {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
                       AddProductInputEntity(
+                        reviews: [],
                         isOrganic: isOrganic,
                         expirationMonths: expirationMonths.toInt(),
                         numOfCalories: numberOfColories.toInt(),
@@ -155,6 +156,7 @@ class _AddProuductViewBodyState extends State<AddProuductViewBody> {
                       );
                       context.read<AddProductCubit>().addProduct(
                             AddProductInputEntity(
+                              reviews: [],
                               isOrganic: isOrganic,
                               expirationMonths: expirationMonths.toInt(),
                               numOfCalories: numberOfColories.toInt(),
