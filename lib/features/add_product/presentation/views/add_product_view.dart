@@ -4,6 +4,7 @@ import 'package:fruits_hup_dashboard/core/repos/images_repo/images_repo.dart';
 import 'package:fruits_hup_dashboard/core/repos/product_repo/products_repo.dart';
 import 'package:fruits_hup_dashboard/core/services/git_it_services.dart';
 import 'package:fruits_hup_dashboard/features/add_product/presentation/manager/cubit/add_product_cubit.dart';
+import 'package:fruits_hup_dashboard/features/add_product/presentation/views/widget/add_product_view_body_bloc_builder.dart';
 import 'package:fruits_hup_dashboard/features/add_product/presentation/views/widget/add_prouduct_view_body.dart';
 
 import '../../../../core/widget/build_app_bar.dart';
@@ -19,9 +20,11 @@ class AddProductView extends StatelessWidget {
         'Add Product',
       ),
       body: BlocProvider(
-        create: (context) =>
-            AddProductCubit(getIt.get<ImagesRepo>(), getIt.get<ProductsRepo>()),
-        child: const AddProuductViewBody(),
+        create: (context) => AddProductCubit(
+          getIt.get<ImagesRepo>(),
+          getIt.get<ProductsRepo>(),
+        ),
+        child: const addProductViewBodyBlockBuilder(),
       ),
     );
   }
